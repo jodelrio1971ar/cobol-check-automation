@@ -1,0 +1,11 @@
+# Resultados generados por COBOL Check
+cobol-check/testruns/*
+!cobol-check/testruns/.gitkeep
+
+# Respaldos locales
+*.backup
+*.backup-*
+*.bak
+
+# Archivos temporales
+/tmp/
