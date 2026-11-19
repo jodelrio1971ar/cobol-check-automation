@@ -2,26 +2,34 @@ name: COBOL Check Automation
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   cobol-check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Descargar el repositorio
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Instalar GnuCOBOL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnucobol
+
+      - name: Configurar Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '11'
 
-      - name: Smoke test
-        env:
-          ZOWE_USERNAME: ${{ secrets.ZOWE_USERNAME }}
-          ZOWE_PASSWORD: ${{ secrets.ZOWE_PASSWORD }}
+      - name: Preparar permisos
         run: |
-          echo "Workflow iniciado"
-          echo "Usuario z/OS configurado: $ZOWE_USERNAME"
+          chmod +x .github/scripts/run_cobolcheck.sh
+          chmod +x cobol-check/scripts/linux_gnucobol_run_tests
+
+      - name: Ejecutar pruebas COBOL Check
+        run: |
+          .github/scripts/run_cobolcheck.sh EMPPAY
