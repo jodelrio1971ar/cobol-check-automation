@@ -33,3 +33,4 @@ jobs:
       - name: Ejecutar pruebas COBOL Check
         run: |
           .github/scripts/run_cobolcheck.sh EMPPAY
+          .github/scripts/run_cobolcheck.sh DEPTPAY
