@@ -1,0 +1,17 @@
+TestSuite 'Checks the department payment'
+
+TestCase 'checks the number of department employees'
+PERFORM AVERAGE-SALARY
+EXPECT DEPT-NBR-EMPS TO BE 19
+
+TestCase 'checks the total department salaries'
+PERFORM AVERAGE-SALARY
+EXPECT DEPT-TOTAL-SALARIES >= 111000
+
+TestCase 'checks the average salary is greater than 5800'
+PERFORM AVERAGE-SALARY
+EXPECT DEPT-AVG-SALARY >= 5800
+
+TestCase 'checks the average salary is less than 5900'
+PERFORM AVERAGE-SALARY
+EXPECT DEPT-AVG-SALARY <= 5900
